@@ -1,0 +1,26 @@
+environment: "prod"
+serviceAccountName: cwb01-sa
+createIngress: false
+
+net:
+  host: "api.cwb01.dsgov.nuvalence.io"
+
+env:
+  ALLOWED_ORIGINS: "http://localhost:4200, http://localhost:4201, https://api.cwb01.dsgov.nuvalence.io, https://agency.cwb01.dsgov.nuvalence.io, https://public.cwb01.dsgov.nuvalence.io, https://employer.cwb01.dsgov.nuvalence.io"
+  CERBOS_URI: "127.0.0.1:3592"
+  DB_CONNECTION_URL: "jdbc:postgresql://127.0.0.1:5432/cwb01-prod-work-manager-db"
+  DB_USERNAME: "${sm://projects/cwb01-prod/secrets/cwb01-prod-db-user/versions/latest}"
+  DB_PASSWORD: "${sm://projects/cwb01-prod/secrets/cwb01-prod-db-pass/versions/latest}"
+  GCP_PROJECT_ID: "cwb01-prod"
+  SELF_SIGN_PUBLIC_KEY: "${sm://projects/cwb01-prod/secrets/cwb01-self-signed-token-public-key/versions/latest}"
+  SELF_SIGN_PRIVATE_KEY: "${sm://projects/cwb01-prod/secrets/cwb01-self-signed-token-private-key/versions/latest}"
+  USER_MANAGEMENT_BASE_URL: "http://cwb01-user-management/um"
+  TOKEN_PRIVATE_KEY_SECRET: "cwb01-self-signed-token-private-key"
+  TOKEN_ISSUER: "cwb01"
+  TOKEN_PRIVATE_KEY_VERSION: "latest"
+  OTEL_SAMPLER_PROBABILITY: 1.0 # valid values: [0.0 - 1.0]
+  DASHBOARD_URL: "https://public.cwb01.dsgov.nuvalence.io/dashboard"
+  PUBSUB_EMULATOR_HOST: false # set actual "host:port" to enable or false to disable
+  PUBSUB_EMULATOR_ENABLED: false # set to true to enable emulator
+  # cwb01-events publisher topics separated by comma
+  PUBLISHER_TOPICS: projects/cwb01-prod/topics/DOCUMENT_PROCESSING_INITIATION,projects/cwb01-prod/topics/APPLICATION_ROLE_REPORTING,projects/cwb01-prod/topics/NOTIFICATION_REQUESTS,projects/cwb01-prod/topics/AUDIT_EVENTS_RECORDING
